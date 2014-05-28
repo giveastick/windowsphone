@@ -6,7 +6,15 @@ using System.Threading.Tasks;
 
 namespace GiveAStickWP8.ViewModels
 {
-    class ViewModelListPage
+    public class ViewModelListPage
     {
+        #region Fields
+        #endregion
+        #region Properties
+        #endregion
+        #region Constructors
+        #endregion
+        #region Methods
+        #endregion
     }
 }
