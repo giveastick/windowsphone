@@ -40,10 +40,10 @@
             <ScrollViewer>
                 <StackPanel>
                     <TextBlock Text="{Binding Path=LocalizedResources.GroupTag, Source={StaticResource LocalizedStrings}}"/>
-                    <TextBox x:Name="GroupTag"/>
+                    <TextBox x:Name="GroupTag" Text="{Binding GroupTag, Mode=TwoWay}"/>
 
                     <TextBlock Text="{Binding Path=LocalizedResources.Nickname, Source={StaticResource LocalizedStrings}}"/>
-                    <TextBox x:Name="Nickname"/>
+                    <TextBox x:Name="Nickname" Text="{Binding Nickname, Mode=TwoWay}"/>
 
                     <Button Content="{Binding Path=LocalizedResources.Join, Source={StaticResource LocalizedStrings}}" 
                             Command="{Binding GoToListCommand}"/>
