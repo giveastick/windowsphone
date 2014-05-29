@@ -6,13 +6,18 @@
     xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
+    xmlns:controls="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls"
     xmlns:vm="clr-namespace:GiveAStickWP8.ViewModels"
+    xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+    mc:Ignorable="d"    
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
     SupportedOrientations="Portrait" Orientation="Portrait"
-    mc:Ignorable="d"
-    shell:SystemTray.IsVisible="True">
+    shell:SystemTray.IsVisible="True"
+    toolkit:TiltEffect.IsTiltEnabled="True"
+    x:Name="_this">
 
     <phone:PhoneApplicationPage.DataContext>
         <vm:ViewModelListPage/>
@@ -37,8 +42,23 @@
         <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
             <ScrollViewer>
                 <StackPanel>
+                    <toolkit:ContextMenuService.ContextMenu>
+                        <toolkit:ContextMenu>
+                            <toolkit:MenuItem Header="Donner un batton" 
+                                        Command="{Binding Path=DataContext.AddStickCommand, ElementName=_this}"
+                                        CommandParameter="{Binding}"/>
+                        </toolkit:ContextMenu>
+                    </toolkit:ContextMenuService.ContextMenu>
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="Tap">
+                            <i:InvokeCommandAction Command="{Binding Path=DataContext.SelectedContact, ElementName=_this}" CommandParameter="{Binding}"/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+
                     <TextBlock Text="{Binding Nickname}"
-                               Style="{StaticResource PhoneTextNormalStyle}"/>
+                                Style="{StaticResource PhoneTextNormalStyle}"/>
+                    <TextBlock Text="{Binding StickCount}" 
+                                Style="{StaticResource PhoneTextAccentStyle}"/>
                 </StackPanel>
             </ScrollViewer>
         </Grid>

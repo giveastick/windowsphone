@@ -5,7 +5,7 @@ VisualStudioVersion = 12.0.21005.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GiveAStickWP8", "GiveAStickWP8\GiveAStickWP8.csproj", "{6260042D-95D9-4124-904A-49977AF2B47B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WP.Core", "..\..\..\Desktop\giveAstick\WP.Core\WP.Core.csproj", "{78A9E047-09D4-44F2-84FB-2A11E263B002}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WP.Core", "WP.Core\WP.Core.csproj", "{78A9E047-09D4-44F2-84FB-2A11E263B002}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
