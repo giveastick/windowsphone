@@ -106,7 +106,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>AppResources.resx</DependentUpon>
     </Compile>
-    <Compile Include="ViewModels\ObservableObject.cs" />
     <Compile Include="ViewModels\ViewModelListPage.cs" />
     <Compile Include="ViewModels\ViewModelMainPage.cs" />
   </ItemGroup>
@@ -150,6 +149,7 @@
     <Content Include="Assets\Tiles\IconicTileSmall.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="SplashScreenImage.jpg" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\AppResources.resx">

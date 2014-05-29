@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Phone.Shell;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -67,6 +68,8 @@ namespace GiveAStickWP8.ViewModels
 
         private void ExecuteGoToListCommand(object arg)
         {
+            PhoneApplicationService.Current.State["Nickname"] = Nickname;
+            PhoneApplicationService.Current.State["GroupTag"] = GroupTag;
             Uri u = new Uri("/ListPage.xaml", UriKind.Relative);
             App.RootFrame.Navigate(u);
         }
