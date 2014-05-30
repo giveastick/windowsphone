@@ -16,5 +16,27 @@ namespace GiveAStickWP8
         {
             InitializeComponent();
         }
+
+        private void RefreshList(object sender, EventArgs e)
+        {
+            Uri u = new Uri("/ListPage.xaml", UriKind.Relative);
+            App.RootFrame.Navigate(u);
+        }
+
+        private void Logout(object sender, EventArgs e)
+        {
+            try
+            {
+                if (MessageBoxResult.OK == MessageBox.Show("Voulez-vous vraiment vous déconnecter ?", "Déconnexion", MessageBoxButton.OKCancel))
+                {
+                    Uri u = new Uri("/MainPage.xaml", UriKind.Relative);
+                    App.RootFrame.Navigate(u);
+                }
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Erreur de déconnexion du compte.");
+            }
+        }
     }
 }

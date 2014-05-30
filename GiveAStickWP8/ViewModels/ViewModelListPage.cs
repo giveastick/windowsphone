@@ -66,7 +66,6 @@ namespace GiveAStickWP8.ViewModels
         public ViewModelListPage()
         {
             _SelectedContact = new DelegateCommand(ExecuteSelectedContact, CanExecuteSelectContact);
-            _AddStickCommand = new DelegateCommand(ExecuteAddStick, CanExecuteAddStick);
         }
 
         #endregion

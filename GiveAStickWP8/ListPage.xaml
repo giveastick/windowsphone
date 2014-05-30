@@ -63,5 +63,17 @@
             </ScrollViewer>
         </Grid>
     </Grid>
+    
+    <!--ApplicationBar-->
+    <phone:PhoneApplicationPage.ApplicationBar>
+        <shell:ApplicationBar IsVisible="True" IsMenuEnabled="True">
+            <shell:ApplicationBarIconButton IconUri="/Assets/Icones/refresh.png" Text="Rafraichir" Click="RefreshList"/>
+            <shell:ApplicationBarIconButton IconUri="/Assets/Icones/cancel.png" Text="Déconnexion" Click="Logout"/>
+            <shell:ApplicationBar.MenuItems>
+                <shell:ApplicationBarMenuItem Text="Rafraichir" Click="RefreshList"/>
+                <shell:ApplicationBarMenuItem Text="Déconnexion" Click="Logout"/>
+            </shell:ApplicationBar.MenuItems>
+        </shell:ApplicationBar>
+    </phone:PhoneApplicationPage.ApplicationBar>
 
 </phone:PhoneApplicationPage>
