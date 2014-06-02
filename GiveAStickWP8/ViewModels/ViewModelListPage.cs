@@ -1,6 +1,8 @@
 ﻿using Microsoft.Phone.Shell;
+using RestSharp;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,10 +19,18 @@ namespace GiveAStickWP8.ViewModels
 
         private string _GroupTag = (string)PhoneApplicationService.Current.State["GroupTag"];
         private string _Nickname = (string)PhoneApplicationService.Current.State["Nickname"];
-        private long _StickCount = 50;
 
         private DelegateCommand _AddStickCommand;
         private DelegateCommand _SelectedContact;
+
+        private ObservableCollection<Stick> _Sticklist; 
+
+        public ObservableCollection<Stick> Sticklist
+        {
+            get { return _Sticklist; }
+            set { OnPropertyChanging(); _Sticklist = value; OnPropertyChanged(); }
+        }
+        
 
         #endregion
 
@@ -40,19 +50,6 @@ namespace GiveAStickWP8.ViewModels
             get { return _Nickname; }
         }
 
-        public long StickCount
-        {
-            get { return _StickCount; }
-            set
-            {
-                if (_StickCount != value) //Si la valeur que l'on souhaite affecté est différente de la valeur actuelle.
-                {
-                    _StickCount = value; //On modifie le champ privé.
-                    OnPropertyChanged();//On déclenche le OnPropertyChanged pour la mise à jour de l'UI via le Binding.
-                }
-            }
-        }
-
         public DelegateCommand AddStickCommand
         {
             get { return _AddStickCommand; }
@@ -65,6 +62,7 @@ namespace GiveAStickWP8.ViewModels
 
         public ViewModelListPage()
         {
+            loadSticklist();
             _SelectedContact = new DelegateCommand(ExecuteSelectedContact, CanExecuteSelectContact);
         }
 
@@ -83,13 +81,56 @@ namespace GiveAStickWP8.ViewModels
             {
                 if (MessageBoxResult.OK == MessageBox.Show("Êtes-vous sûr de vouloir donner un batton à " + Nickname + " ?", "Donner", MessageBoxButton.OKCancel))
                 {
-                    StickCount ++;
                 }
             }
             catch (Exception)
             {
                 MessageBox.Show("Erreur d'ajout du batton.");
             }
+        }
+
+        private void loadSticklist()
+        {
+            var restClient = new RestClient(Parameters.API_URL);
+
+            var getSticklistRequest = new RestRequest(Parameters.API_GETSTICKLIST_RESOURCE, Method.GET);
+            getSticklistRequest.AddUrlSegment("nickname", this.Nickname);
+            getSticklistRequest.AddUrlSegment("grouptag", this.GroupTag);
+
+            restClient.ExecuteAsync(getSticklistRequest, getSticklistCallback);
+        }
+
+        private void getSticklistCallback(IRestResponse response, RestRequestAsyncHandle handle)
+        {
+            Console.Out.WriteLine(response);
+            var sticksJson = SimpleJson.DeserializeObject(response.Content) as Array;
+
+            foreach (dynamic item in sticksJson)
+            {
+              string nickname =  item.nickname;
+              int balance =  item.balance;
+
+              Stick stick = new Stick();
+              stick.setNickname(nickname);
+              stick.setBalance(balance);
+            }
+            /*
+            Sticklist = new ObservableCollection<Stick>();
+            for(int i = 0; i<sticksJson.length(); i++)
+            {
+                Sticklist.Add(Stick.fromJsonString(sticksJson.GetHashCo);
+            }
+            */
+            // Transformer var toto en stick
+            // Ajouter toto à observable collection
+
+
+            
+
+
+            
+
+            //throw new NotImplementedException();
         }
 
         // Cette méthode ne fonctionne pas
@@ -99,7 +140,6 @@ namespace GiveAStickWP8.ViewModels
             {
                 if (MessageBoxResult.OK == MessageBox.Show("Êtes-vous sûr de vouloir donner un batton à " + Nickname + " ?", "Donner", MessageBoxButton.OKCancel))
                 {
-                    StickCount += StickCount;
                 }
             }
             catch (Exception)
