@@ -88,6 +88,15 @@ namespace GiveAStickWP8.Resources {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à  bâtons.
+        /// </summary>
+        public static string BalanceString {
+            get {
+                return ResourceManager.GetString("BalanceString", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Groupe :.
         /// </summary>
         public static string GroupTag {

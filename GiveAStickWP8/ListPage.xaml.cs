@@ -7,6 +7,10 @@ using System.Windows.Controls;
 using System.Windows.Navigation;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
+using RestSharp;
+using Newtonsoft.Json;
+using System.Collections.ObjectModel;
+using System.Collections;
 
 namespace GiveAStickWP8
 {
@@ -16,6 +20,17 @@ namespace GiveAStickWP8
         {
             InitializeComponent();
         }
+
+        private void stickItemTap(Object sender, System.Windows.Input.GestureEventArgs e)
+        {
+            Stick s = ((sender as ListBox).SelectedItem as Stick);
+
+            if (s != null)
+            {
+                MessageBox.Show(s.Nickname);
+            }
+        }
+
 
         private void RefreshList(object sender, EventArgs e)
         {

@@ -62,8 +62,12 @@
                                 Style="{StaticResource PhoneTextAccentStyle}"/>
                 </StackPanel>
                 -->
-                <ListBox ItemsSource="{Binding Sticklist}" x:Name="Stickslist">
+                <ListBox x:Name="Stickslist" 
+                         ItemsSource="{Binding Sticklist}"
+                         ItemTemplate="{StaticResource StickListTemplate}"
+                         Tap="stickItemTap">
                 </ListBox>
+                
             </ScrollViewer>
         </Grid>
     </Grid>

@@ -8,6 +8,22 @@
     <!--Ressources d'applications-->
     <Application.Resources>
         <local:LocalizedStrings xmlns:local="clr-namespace:GiveAStickWP8" x:Key="LocalizedStrings"/>
+        
+        <DataTemplate x:Name="StickListTemplate">
+            <Grid x:Name="LayoutRoot" 
+                  Background="{StaticResource PhoneBackgroundBrush}" 
+                  HorizontalAlignment="Left" Width="720" Margin="0,0,-240,0">
+                <TextBlock HorizontalAlignment="Left" Margin="63,30,0,0" TextWrapping="Wrap" 
+                           Text="{Binding Nickname}" VerticalAlignment="Top" Width="385" Height="51" Style="{StaticResource PhoneTextLargeStyle}"/>
+                <TextBlock  HorizontalAlignment="Left" Margin="63,79,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="385" Style="{StaticResource PhoneTextSubtleStyle}">
+        	        <Run  Text="0"/>
+        	        <Run Text="{Binding StickBalance}"/>
+                </TextBlock>
+                <Rectangle Fill="{Binding Brush, Mode=TwoWay}" 
+                           HorizontalAlignment="Left" Height="99" Margin="16,21,0,0" Stroke="Black" VerticalAlignment="Top" Width="23"/>
+            </Grid>
+        </DataTemplate>
+        
     </Application.Resources>
 
     <Application.ApplicationLifetimeObjects>

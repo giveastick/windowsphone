@@ -1,4 +1,5 @@
 ﻿using Microsoft.Phone.Shell;
+using Newtonsoft.Json;
 using RestSharp;
 using System;
 using System.Collections.Generic;
@@ -100,19 +101,22 @@ namespace GiveAStickWP8.ViewModels
             restClient.ExecuteAsync(getSticklistRequest, getSticklistCallback);
         }
 
+
         private void getSticklistCallback(IRestResponse response, RestRequestAsyncHandle handle)
         {
-            Console.Out.WriteLine(response);
-            var sticksJson = SimpleJson.DeserializeObject(response.Content) as Array;
+            Stick[] sticks = JsonConvert.DeserializeObject<Stick[]>(response.Content);
 
-            foreach (dynamic item in sticksJson)
+            if (sticks != null)
             {
-              string nickname =  item.nickname;
-              int balance =  item.balance;
-
-              Stick stick = new Stick();
-              stick.setNickname(nickname);
-              stick.setBalance(balance);
+                Sticklist = new ObservableCollection<Stick>();
+                int i = 0;
+                foreach (Stick item in sticks)
+                {
+                    item.Order = i;
+                    item.Brush = item.getRectangleFillBrush(i);
+                    Sticklist.Add(item);
+                    i++;
+                }
             }
             /*
             Sticklist = new ObservableCollection<Stick>();

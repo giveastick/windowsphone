@@ -146,4 +146,7 @@
   <data name="Nickname" xml:space="preserve">
     <value>Pseudo :</value>
   </data>
+  <data name="BalanceString" xml:space="preserve">
+    <value> bâtons</value>
+  </data>
 </root>
