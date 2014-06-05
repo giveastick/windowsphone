@@ -39,8 +39,7 @@
         </StackPanel>
 
         <!--ContentPanel - placez tout contenu supplémentaire ici-->
-        <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
-            <ScrollViewer>
+        <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,70">
                 <!--
                 <StackPanel>
                     <toolkit:ContextMenuService.ContextMenu>
@@ -62,19 +61,17 @@
                                 Style="{StaticResource PhoneTextAccentStyle}"/>
                 </StackPanel>
                 -->
-                <ListBox x:Name="Stickslist" 
+            <ListBox x:Name="Stickslist" 
                          ItemsSource="{Binding Sticklist}"
                          ItemTemplate="{StaticResource StickListTemplate}"
                          Tap="stickItemTap">
-                </ListBox>
-                
-            </ScrollViewer>
+            </ListBox>
         </Grid>
     </Grid>
     
     <!--ApplicationBar-->
     <phone:PhoneApplicationPage.ApplicationBar>
-        <shell:ApplicationBar IsVisible="True" IsMenuEnabled="True">
+        <shell:ApplicationBar IsVisible="True" IsMenuEnabled="True" Opacity="0.5">
             <shell:ApplicationBarIconButton IconUri="/Assets/Icones/refresh.png" Text="Rafraichir" Click="RefreshList"/>
             <shell:ApplicationBarIconButton IconUri="/Assets/Icones/cancel.png" Text="Déconnexion" Click="Logout"/>
             <shell:ApplicationBar.MenuItems>

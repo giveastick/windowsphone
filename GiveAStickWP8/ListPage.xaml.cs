@@ -16,6 +16,9 @@ namespace GiveAStickWP8
 {
     public partial class ListPage : PhoneApplicationPage
     {
+        private string _GroupTag = (string)PhoneApplicationService.Current.State["GroupTag"];
+        private string _Nickname = (string)PhoneApplicationService.Current.State["Nickname"];
+
         public ListPage()
         {
             InitializeComponent();
@@ -27,15 +30,19 @@ namespace GiveAStickWP8
 
             if (s != null)
             {
-                MessageBox.Show(s.Nickname);
+                if (MessageBoxResult.OK == MessageBox.Show("Voulez-vous vraiment mettre un bâton à " + s.Nickname + " ?", "Confirmation", MessageBoxButton.OKCancel))
+                {
+                    (this.DataContext as ViewModels.ViewModelListPage).postStickRequest(s.Nickname);
+                }
             }
         }
 
 
+
         private void RefreshList(object sender, EventArgs e)
         {
-            Uri u = new Uri("/ListPage.xaml", UriKind.Relative);
-            App.RootFrame.Navigate(u);
+            (this.DataContext as ViewModels.ViewModelListPage).loadSticklist();
+
         }
 
         private void Logout(object sender, EventArgs e)

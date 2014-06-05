@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -90,7 +91,7 @@ namespace GiveAStickWP8.ViewModels
             }
         }
 
-        private void loadSticklist()
+        public void loadSticklist()
         {
             var restClient = new RestClient(Parameters.API_URL);
 
@@ -118,44 +119,30 @@ namespace GiveAStickWP8.ViewModels
                     i++;
                 }
             }
-            /*
-            Sticklist = new ObservableCollection<Stick>();
-            for(int i = 0; i<sticksJson.length(); i++)
-            {
-                Sticklist.Add(Stick.fromJsonString(sticksJson.GetHashCo);
-            }
-            */
-            // Transformer var toto en stick
-            // Ajouter toto à observable collection
-
-
-            
-
-
-            
-
-            //throw new NotImplementedException();
         }
 
-        // Cette méthode ne fonctionne pas
-        private void ExecuteAddStick(object parameters)
+        public void postStickRequest(String receiver)
         {
-            try
-            {
-                if (MessageBoxResult.OK == MessageBox.Show("Êtes-vous sûr de vouloir donner un batton à " + Nickname + " ?", "Donner", MessageBoxButton.OKCancel))
-                {
-                }
-            }
-            catch (Exception)
-            {
-                MessageBox.Show("Erreur d'ajout du batton.");
-            }
+            var restClient = new RestClient(Parameters.API_URL);
+
+            var postStickRequest = new RestRequest(Parameters.API_POSTSTICK_RESOURCE, Method.POST);
+            postStickRequest.AddParameter("giver", this._Nickname);
+            postStickRequest.AddParameter("receiver", receiver);
+            postStickRequest.AddUrlSegment("grouptag", this._GroupTag);
+
+            restClient.ExecuteAsync(postStickRequest, postStickCallback);
         }
 
-        // Cette méthode ne fonctionne pas
-        private bool CanExecuteAddStick(object parameters)
+        private void postStickCallback(IRestResponse response, RestRequestAsyncHandle handle)
         {
-            return true;
+            if (response.StatusCode == HttpStatusCode.OK)
+            {
+                loadSticklist();
+            }
+            else
+            {
+                MessageBox.Show("Une erreur est survenue lors du batonnage de cet individu. Try again later.");
+            }
         }
 
         #endregion
