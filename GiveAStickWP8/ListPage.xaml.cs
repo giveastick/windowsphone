@@ -11,13 +11,17 @@ using RestSharp;
 using Newtonsoft.Json;
 using System.Collections.ObjectModel;
 using System.Collections;
+using System.IO.IsolatedStorage;
 
 namespace GiveAStickWP8
 {
     public partial class ListPage : PhoneApplicationPage
     {
-        private string _GroupTag = (string)PhoneApplicationService.Current.State["GroupTag"];
-        private string _Nickname = (string)PhoneApplicationService.Current.State["Nickname"];
+        //private string _GroupTag = (string)PhoneApplicationService.Current.State["GroupTag"];
+        //private string _Nickname = (string)PhoneApplicationService.Current.State["Nickname"];
+
+        private string _GroupTage = (string)IsolatedStorageSettings.ApplicationSettings["GroupTag"];
+        private string _Nickname = (string)IsolatedStorageSettings.ApplicationSettings["Nickname"];
 
         public ListPage()
         {

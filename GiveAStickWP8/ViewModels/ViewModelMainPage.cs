@@ -1,6 +1,7 @@
 ﻿using Microsoft.Phone.Shell;
 using System;
 using System.Collections.Generic;
+using System.IO.IsolatedStorage;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -68,8 +69,19 @@ namespace GiveAStickWP8.ViewModels
 
         private void ExecuteGoToListCommand(object arg)
         {
-            PhoneApplicationService.Current.State["Nickname"] = Nickname;
-            PhoneApplicationService.Current.State["GroupTag"] = GroupTag;
+            if ((IsolatedStorageSettings.ApplicationSettings.Contains("Nickname") || IsolatedStorageSettings.ApplicationSettings.Contains("GroupTag")) == false)
+            {
+                IsolatedStorageSettings.ApplicationSettings.Add("Nickname", Nickname);
+                IsolatedStorageSettings.ApplicationSettings.Add("GroupTag", GroupTag);
+            }
+            else
+            {
+                IsolatedStorageSettings.ApplicationSettings["Nickname"] = Nickname;
+                IsolatedStorageSettings.ApplicationSettings["GroupTag"] = GroupTag;
+            }
+
+            IsolatedStorageSettings.ApplicationSettings.Save();
+
             Uri u = new Uri("/ListPage.xaml", UriKind.Relative);
             App.RootFrame.Navigate(u);
         }

@@ -24,9 +24,19 @@
 
                 
                 <StackPanel Grid.Column="1" Margin="20">
-                    <TextBlock HorizontalAlignment="Left"
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock HorizontalAlignment="Left"
                                Style="{StaticResource PhoneTextLargeStyle}"
+                               Margin="5,10,0,10"
+                               Text="@"/>
+
+                        <TextBlock HorizontalAlignment="Left"
+                               Style="{StaticResource PhoneTextLargeStyle}"
+                               Margin="5,10,0,10"
                                Text="{Binding Nickname}" />
+                    </StackPanel>
+
+
                     
                     <StackPanel Orientation="Horizontal">
                         <TextBlock HorizontalAlignment="Left"

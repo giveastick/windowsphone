@@ -31,23 +31,31 @@ namespace GiveAStickWP8
         {
             Color rectColor = Color.FromArgb(0x00, 0x00, 0x00, 0x00);
 
-            int baseR = 255;
+            int baseR = 0;
             int baseG = 0;
-            int baseB = 13;
+            int baseB = 0;
+            int alpha = 255;
 
-            int newR = baseR - order * 12;
-            int newG = baseG - order * 0;
-            int newB = baseB - order * 2;
+            switch (order)
+            {
+                case 0: baseR = 255; baseG = 0; baseB = 18;
+                    break;
 
-            if (newR < 0) newR = 0;
-            if (newG < 0) newG = 0;
-            if (newB < 0) newB = 0;
-            
-            rectColor.A = (byte)255;
+                case 1: baseR = 255; baseG = 180; baseB = 18;
+                    break;
 
-            rectColor.R = BitConverter.GetBytes(newR)[0];
-            rectColor.G = BitConverter.GetBytes(newG)[0];
-            rectColor.B = BitConverter.GetBytes(newB)[0];
+                case 2: baseR = 255; baseG = 225; baseB = 18;
+                    break;
+
+                default: baseR = 255; baseG = 225; baseB = 255; alpha = 100;
+                    break;
+            }
+
+            rectColor.R = BitConverter.GetBytes(baseR)[0];
+            rectColor.G = BitConverter.GetBytes(baseG)[0];
+            rectColor.B = BitConverter.GetBytes(baseB)[0];
+
+            rectColor.A = (byte)alpha;
 
             Brush result = new SolidColorBrush(rectColor);
 

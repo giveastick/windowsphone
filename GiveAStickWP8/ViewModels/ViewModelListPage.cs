@@ -4,6 +4,7 @@ using RestSharp;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.IO.IsolatedStorage;
 using System.Linq;
 using System.Net;
 using System.Text;
@@ -19,8 +20,8 @@ namespace GiveAStickWP8.ViewModels
     {
         #region Fields
 
-        private string _GroupTag = (string)PhoneApplicationService.Current.State["GroupTag"];
-        private string _Nickname = (string)PhoneApplicationService.Current.State["Nickname"];
+        private string _GroupTag = (string)IsolatedStorageSettings.ApplicationSettings["GroupTag"];
+        private string _Nickname = (string)IsolatedStorageSettings.ApplicationSettings["Nickname"];
 
         private DelegateCommand _AddStickCommand;
         private DelegateCommand _SelectedContact;

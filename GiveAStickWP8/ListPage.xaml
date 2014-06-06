@@ -34,33 +34,24 @@
         <StackPanel Grid.Row="0" Margin="12,17,0,28">
             <TextBlock Text="{Binding Path=LocalizedResources.ApplicationTitle, Source={StaticResource LocalizedStrings}}" 
                        Style="{StaticResource PhoneTextNormalStyle}"/>
-            <TextBlock Text="{Binding GroupTag}" 
-                       Style="{StaticResource PhoneTextTitle1Style}"/>
+
+            <StackPanel Orientation="Horizontal">
+                <TextBlock HorizontalAlignment="Left"
+                               Style="{StaticResource PhoneTextTitle1Style}"
+                               Margin="0"
+                               Text="#"/>
+
+                <TextBlock HorizontalAlignment="Left"
+                               Style="{StaticResource PhoneTextTitle1Style}"
+                               Margin="5,0,0,0"
+                               Text="{Binding GroupTag}"/>
+            </StackPanel>
+
         </StackPanel>
 
         <!--ContentPanel - placez tout contenu supplémentaire ici-->
         <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,70">
-                <!--
-                <StackPanel>
-                    <toolkit:ContextMenuService.ContextMenu>
-                        <toolkit:ContextMenu>
-                            <toolkit:MenuItem Header="Donner un batton" 
-                                        Command="{Binding Path=DataContext.AddStickCommand, ElementName=_this}"
-                                        CommandParameter="{Binding}"/>
-                        </toolkit:ContextMenu>
-                    </toolkit:ContextMenuService.ContextMenu>
-                    <i:Interaction.Triggers>
-                        <i:EventTrigger EventName="Tap">
-                            <i:InvokeCommandAction Command="{Binding Path=DataContext.SelectedContact, ElementName=_this}" CommandParameter="{Binding}"/>
-                        </i:EventTrigger>
-                    </i:Interaction.Triggers>
 
-                    <TextBlock Text="{Binding Nickname}"
-                                Style="{StaticResource PhoneTextNormalStyle}"/>
-                    <TextBlock Text="{Binding StickCount}" 
-                                Style="{StaticResource PhoneTextAccentStyle}"/>
-                </StackPanel>
-                -->
             <ListBox x:Name="Stickslist" 
                          ItemsSource="{Binding Sticklist}"
                          ItemTemplate="{StaticResource StickListTemplate}"
